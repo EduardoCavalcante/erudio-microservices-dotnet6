@@ -34,6 +34,27 @@ public class CalculatorController : ControllerBase
         }
     }
 
+    [HttpGet("multiplicacao/{firstNumber}/{secondNumber}")]
+    public IActionResult multiplicacao(string firstNumber, string secondNumber)
+    {
+
+        try
+        {
+            decimal sum = 0;
+
+            if (IsNumeric(firstNumber) == false || IsNumeric(secondNumber) == false)
+                throw new Exception("Invalid Input");
+
+            sum = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
+            return Ok(sum.ToString());
+
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpGet("sum/{firstNumber}/{secondNumber}")]
     public IActionResult Get(string firstNumber , string secondNumber)
     {
